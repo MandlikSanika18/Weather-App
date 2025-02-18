@@ -12,8 +12,9 @@ body{
     align-items: center;
 }
 .container{
-    height: 500px;
-    width:350px;
+    width:90%;
+    max-width: 350px;
+    height:120px;
     border:1px solid black;
     border-radius: 10px;
     background: linear-gradient(to right, #8db3f5, #4c6fac)
@@ -24,7 +25,7 @@ body{
     align-items: center;
     margin-top: 40px;
 }
-.search{
+.search-input{
     padding-left:10px;
 }
 img{
@@ -95,10 +96,13 @@ input{
    color:white;
    display: none;
 }
+.weather{
+    display: none;
+}
 @media (max-width: 768px) {
     .container {
         width: 300px;
-        height:470px;
+        
     }
     .bottom{
         display:flex;
@@ -117,7 +121,7 @@ input{
 @media (max-width: 480px) {
     .container {
         width: 300px;
-        height: 470px;
+       
     }
     .bottom{
         display:flex;

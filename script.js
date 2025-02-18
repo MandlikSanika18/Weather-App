@@ -7,16 +7,21 @@ const WeatherIcon=document.querySelector(".weather-icon")
 async function weatherData(cityname){
     const response= await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${apiKey}&units=metric`);
 
-     
-    const data = await response.json()
-    console.log(data);
-
-    if(response.status == 404){
-        document.querySelector(".error").style.display="block";
-        document.querySelector(".last").style.display="none";
+    if(response.status == 404 || searchBox.value == ""){
         document.querySelector(".container").style.height="120px";
+        document.querySelector(".error").style.display="block";
+        document.querySelector(".weather").style.display="none";
     }
     else{
+        const data = await response.json()
+        console.log(data);
+
+    document.querySelector(".container").style.height="500px";
+    document.querySelector(".city").innerHTML= data.name;
+    document.querySelector(".temp").innerHTML=Math.round(data.main.temp) + "°C ";
+    document.querySelector(".humidity").innerHTML= data.main.humidity + "%";
+    document.querySelector(".wind").innerHTML= data.wind.speed + "km/h";
+
         if(data.weather[0].main == "Clouds"){
             WeatherIcon.src="images/clouds.png";
         }
@@ -32,13 +37,13 @@ async function weatherData(cityname){
         else if(data.weather[0].main == "Mist"){
             WeatherIcon.src="images/mist.png";
         }
+        document.querySelector(".error").style.display="none";
+        document.querySelector(".weather").style.display="block";
+    }
     }
 
-    document.querySelector(".city").innerHTML= data.name;
-    document.querySelector(".temp").innerHTML=Math.round(data.main.temp) + "°C ";
-    document.querySelector(".humidity").innerHTML= data.main.humidity + "%";
-    document.querySelector(".wind").innerHTML= data.wind.speed + "km/h";
-}
+    
+
 searchBtn.addEventListener("click", () => {
     weatherData(searchBox.value);
 });
